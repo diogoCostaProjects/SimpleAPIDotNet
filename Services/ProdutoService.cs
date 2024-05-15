@@ -31,5 +31,20 @@ namespace SimpleApi.Services
             await _context.SaveChangesAsync();
             return produto;
         }
+
+        public IEnumerable<Produto> GetProdutosPrecoMaior(decimal precoMinimo)
+        {
+            var query = @"
+                        SELECT p.id, p.nome, p.preco, c.nome AS categoria 
+                        FROM produtos AS p 
+                        INNER JOIN categoria AS c ON c.id = p.categoria
+                        WHERE p.preco > {0}";
+
+            var produtosComCategorias = _context.Produtos
+                                   .FromSqlRaw(query, precoMinimo)
+                                   .ToList();
+            
+            return produtosComCategorias;
+        }
     }
 }

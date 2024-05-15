@@ -40,20 +40,20 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "produto",
-    pattern: "produtos/{action=Index}/{id?}",
-    defaults: new { controller = "Produto" });
+// app.MapControllerRoute(
+//     name: "produto",
+//     pattern: "produtos/{action=Index}/{id?}",
+//     defaults: new { controller = "Produto" });
 
-app.MapControllerRoute(
-    name: "produtoDetalhes",
-    pattern: "produto/{id}",
-    defaults: new { controller = "Produto", action = "Detalhes" });
+// app.MapControllerRoute(
+//     name: "produtoDetalhes",
+//     pattern: "produto/{id}",
+//     defaults: new { controller = "Produto", action = "Detalhes" });
     
-app.MapControllerRoute(
-    name: "produtoTodos",
-    pattern: "produto/todos/",
-    defaults: new { controller = "Produto", action = "Todos" });
+// app.MapControllerRoute(
+//     name: "produtoTodos",
+//     pattern: "produto/todos/",
+//     defaults: new { controller = "Produto", action = "Todos" });
 
 
 app.Run();

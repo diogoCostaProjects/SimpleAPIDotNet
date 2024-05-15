@@ -38,7 +38,19 @@ namespace SimpleApi.Controllers
         public async Task<ActionResult<Produto>> Adicionar(Produto produto)
         {
             var novoProduto = await _produtoService.CreateProdutoAsync(produto);
-            return CreatedAtAction(nameof(GetAll), new { id = novoProduto.Id }, novoProduto);
+            // return CreatedAtAction(nameof(GetAll), new { id = novoProduto.Id }, novoProduto);
+            return Json(new { success = true, msg = "Produto adicionado com sucesso" });
+        }
+
+        [HttpGet("preco-maior/{preco}")]
+        public async Task<ActionResult<Produto>> PrecoMaior(decimal preco)
+        {
+            var produto = _produtoService.GetProdutosPrecoMaior(preco);
+            if (produto == null)
+            {
+                return NotFound();
+            }
+            return Ok(produto);
         }
     }
 }
