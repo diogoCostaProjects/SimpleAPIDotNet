@@ -47,12 +47,13 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "produtoDetalhes",
-    pattern: "produtos/detalhes/{id}",
+    pattern: "produto/{id}",
     defaults: new { controller = "Produto", action = "Detalhes" });
     
 app.MapControllerRoute(
     name: "produtoTodos",
     pattern: "produto/todos/",
     defaults: new { controller = "Produto", action = "Todos" });
+
 
 app.Run();

@@ -24,5 +24,12 @@ namespace SimpleApi.Services
         {
             return await _context.Produtos.FindAsync(id);
         }
+
+        public async Task<Produto> CreateProdutoAsync(Produto produto)
+        {
+            _context.Produtos.Add(produto);
+            await _context.SaveChangesAsync();
+            return produto;
+        }
     }
 }

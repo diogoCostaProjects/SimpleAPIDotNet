@@ -17,23 +17,28 @@ namespace SimpleApi.Controllers
 
         [HttpGet]
         [Route("todos")]
-        // public IActionResult Todos()
-        // {
-        //     // var produtos = new List<object>
-        //     // {
-        //     //     new { Id = 1, Nome = "Produto 1", Preco = 9.99 },
-        //     //     new { Id = 2, Nome = "Produto 2", Preco = 14.99 },
-        //     //     new { Id = 3, Nome = "Produto 3", Preco = 19.99 }
-        //     // };
-
-        //     var produtos = await _produtoService.GetAllProdutosAsync();
-        //     return Ok(produtos);
-        // }
-
         public async Task<ActionResult<List<Produto>>> GetAll()
         {
             var produtos = await _produtoService.GetAllProdutosAsync();
             return Ok(produtos);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Produto>> Detalhes(int id)
+        {
+            var produto = await _produtoService.GetProdutoByIdAsync(id);
+            if (produto == null)
+            {
+                return NotFound();
+            }
+            return Ok(produto);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Produto>> Adicionar(Produto produto)
+        {
+            var novoProduto = await _produtoService.CreateProdutoAsync(produto);
+            return CreatedAtAction(nameof(GetAll), new { id = novoProduto.Id }, novoProduto);
         }
     }
 }
