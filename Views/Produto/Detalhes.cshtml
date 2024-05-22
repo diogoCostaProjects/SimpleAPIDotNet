@@ -6,7 +6,19 @@
     <title>Detalhes - Produto</title>
 </head>
 <body>
-    <h1>Detalhes do Produto</h1>
-    <p>@ViewData["Message"]</p>
+    <h1>Produtos</h1>
+    <!-- <p>@ViewData["Message"]</p> -->
+
+    <p>
+         Lista de produtos <br />
+
+       @foreach (var produto in ViewBag.produtosView)
+       {
+            <li>
+                @produto.Nome por apenas R$ @produto.Preco
+            </li>
+       }
+
+    </p>
 </body>
 </html>
