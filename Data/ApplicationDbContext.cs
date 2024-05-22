@@ -12,6 +12,8 @@ namespace SimpleApi.Data
 
         public DbSet<Produto> Produtos { get; set; }
 
+        public DbSet<ProdutoCustom> ProdutosCustom { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
