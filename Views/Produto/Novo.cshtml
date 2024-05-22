@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Novo Produto</h2>
+        
+        
+            <div class="form-group">
+                <label for="Name">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required />
+            </div>
+            <div class="form-group">
+                <label for="preco">Preço</label>
+                <input type="text" class="form-control" id="preco" name="preco" required />
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <input type="number" class="form-control" id="categoria" name="categoria" required />
+            </div>
+            <button class="btn btn-primary" id="add">Adicionar</button>
+        
+        
+        <div>
+            <a href="/api/produto/todos-web" class="btn btn-secondary">Ver todos </a>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#add").on('click', function () {
+
+                @* alert ('teste');
+                return true; *@
+
+                var formData = {
+                    nome: $("#nome").val(),
+                    preco: $("#preco").val(),
+                    categoria: $("#categoria").val(),
+                };
+
+                var token = $('input[name="__RequestVerificationToken"]').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "https://localhost:5001/api/produto/novo",
+                    data: JSON.stringify(formData),
+                    contentType: "application/json; charset=utf-8",
+                    headers: {
+                        "RequestVerificationToken": token
+                    },
+                    success: function (response) {
+                        alert("Novo produto adicionado");
+                        window.location.href = "/api/produto/todos-web";
+                    },
+                    error: function (response) {
+                        alert("Houve um problema ao tentar adicionar o produto");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

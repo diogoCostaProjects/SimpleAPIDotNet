@@ -17,6 +17,7 @@ namespace SimpleApi.Controllers
         private readonly ProdutoService _produtoService;
 
         [HttpPost]
+        [Route("novo")]
         public async Task<ActionResult<Produto>> Adicionar(Produto produto)
         {
             var novoProduto = await _produtoService.adicionaPorFavor(produto);
@@ -49,7 +50,7 @@ namespace SimpleApi.Controllers
             var verificaProduto = await _produtoService.GetProdutoByIdAsync(in_produto.Id);
             if (verificaProduto == null)
             {
-                throw new KeyNotFoundException("produto não encontrado.");
+                throw new KeyNotFoundException("produto nï¿½o encontrado.");
             }
 
             verificaProduto.Nome = in_produto.Nome;
@@ -67,7 +68,7 @@ namespace SimpleApi.Controllers
         public async Task<ActionResult<Produto>> PrecoMaior(decimal preco)
         {
             var produto = _produtoService.GetProdutosPrecoMaior(preco);
-            if (produto == null)
+            if (produto == null)    
             {
                 return NotFound();
             }
@@ -84,5 +85,13 @@ namespace SimpleApi.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        [Route("novo-produto")]
+        public IActionResult Novo()
+        {
+            return View();
+        }
+        
     }
 }
