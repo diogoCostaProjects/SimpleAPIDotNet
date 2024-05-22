@@ -32,19 +32,19 @@ namespace SimpleApi.Services
             return produto;
         }
 
-        public IEnumerable<Produto> GetProdutosPrecoMaior(decimal precoMinimo)
+        public IEnumerable<ProdutoCustom> GetProdutosPrecoMaior(decimal precoMinimo)
         {
             var query = @"
-                        SELECT p.id, p.nome, p.preco, c.nome AS categoria 
+                        SELECT p.id, p.nome, p.preco, p.categoria, c.nome AS nomeCategoria 
                         FROM produtos AS p 
                         INNER JOIN categoria AS c ON c.id = p.categoria
                         WHERE p.preco > {0}";
 
-            var produtosComCategorias = _context.Produtos
+            var produtosComCategorias = _context.ProdutosCustom
                                    .FromSqlRaw(query, precoMinimo)
                                    .ToList();
-            
-            return produtosComCategorias;
+
+            return (IEnumerable<ProdutoCustom>)produtosComCategorias;
         }
     }
 }
