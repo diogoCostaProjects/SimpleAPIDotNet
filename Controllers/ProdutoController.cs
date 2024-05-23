@@ -76,8 +76,8 @@ namespace SimpleApi.Controllers
         }
 
         [HttpGet]
-        [Route("todos-web")]
-        public async Task<ActionResult<List<Produto>>> Todos()
+        [Route("listar")]
+        public async Task<ActionResult<List<Produto>>> Listar()
         {
             var produtos = await _produtoService.GetAllProdutosAsync();
 
