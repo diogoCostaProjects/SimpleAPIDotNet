@@ -77,7 +77,7 @@ namespace SimpleApi.Controllers
 
         [HttpGet]
         [Route("todos-web")]
-        public async Task<ActionResult<List<Produto>>> Detalhes()
+        public async Task<ActionResult<List<Produto>>> Todos()
         {
             var produtos = await _produtoService.GetAllProdutosAsync();
 
@@ -127,5 +127,26 @@ namespace SimpleApi.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("novo-produto-web")]
+        public IActionResult NovoWeb()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("novo-produto-web-add")]
+        public async Task<ActionResult<Produto>> NovoProdutoWebAdd()
+        {
+            Produto produto =  new Produto();
+
+            produto.Nome =              Request.Form["Nome"];
+            produto.Preco =             decimal.Parse(Request.Form["Preco"]);
+            produto.Categoria =         int.Parse(Request.Form["Categoria"]);
+
+            await _produtoService.adicionaPorFavor(produto);
+
+            return RedirectToAction("Todos");
+        }
     }
 }

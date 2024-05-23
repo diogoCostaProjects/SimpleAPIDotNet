@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Adicionar Produto</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Adicionar Produto via FORM C#</h2>
+
+            <form method="post" action="/api/produto/novo-produto-web-add">
+        
+                <div class="form-group">
+                    <label for="Name">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="Nome" required />
+                </div>
+                <div class="form-group">
+                    <label for="preco">Preço</label>
+                    <input type="text" class="form-control" id="preco" name="Preco" required />
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoria</label>
+                <input type="number" class="form-control" id="categoria" name="Categoria" required />
+                </div>
+                <input type="submit" class="btn btn-primary" value="Adicionar" />
+
+            </form>
+
+        <br /><br />
+        
+        <div>
+            <a href="/api/produto/todos-web" class="btn btn-secondary">Ver todos </a>
+        </div>
+    </div>
+
+</body>
+</html>
