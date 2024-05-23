@@ -92,6 +92,40 @@ namespace SimpleApi.Controllers
         {
             return View();
         }
-        
+
+        public ProdutoService Get_produtoService()
+        {
+            return _produtoService;
+        }
+
+        [HttpGet]
+        [Route("editar-produto/{item_id}")]
+        public async Task<ActionResult<Produto>> Editar(int item_id)
+        {
+            Produto item = await _produtoService.GetProdutoByIdAsync(item_id);
+            ViewBag.item = item;
+            
+            return View();
+        }
+
+        [HttpPost]
+        [Route("editar-produto")]
+        public async Task<ActionResult<Produto>> EditarSave()
+        {
+            var verificaProduto = await _produtoService.GetProdutoByIdAsync(int.Parse(Request.Form["Id"]));
+            if (verificaProduto == null)
+            {
+                throw new KeyNotFoundException("produto não encontrado.");
+            }
+
+            verificaProduto.Nome = Request.Form["Nome"];
+            verificaProduto.Preco = decimal.Parse(Request.Form["Preco"]);
+            verificaProduto.Categoria = int.Parse(Request.Form["Categoria"]);
+
+            await _produtoService.atualizaAgora(verificaProduto);
+
+            return View();
+        }
+
     }
 }

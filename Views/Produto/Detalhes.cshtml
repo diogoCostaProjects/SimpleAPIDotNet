@@ -10,15 +10,20 @@
     <!-- <p>@ViewData["Message"]</p> -->
 
     <p>
-         Lista de produtos <br />
+        Lista de produtos <br />
 
-       @foreach (var produto in ViewBag.produtosView)
-       {
-            <li>
-                @produto.Nome por apenas R$ @produto.Preco
-            </li>
-       }
+         <ul>
+           @foreach (var produto in ViewBag.produtosView)
+           {
+                <li>
+                    @produto.Nome por apenas R$ @produto.Preco <a href="/api/produto/editar-produto/@produto.Id"> Editar </a>
+                </li>
+           }
+        </ul>
+    </p>
 
+    <p>
+        Ou, se desejar, você pode <a href="/api/produto/novo-produto"> Adicionar novos produtos </a>
     </p>
 </body>
 </html>
